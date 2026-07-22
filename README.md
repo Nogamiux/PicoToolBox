@@ -78,8 +78,6 @@ pacchetto installabile:
   contengono un numero di versione leggibile dall'esterno. Il tool
   tiene traccia di cosa ha installato lui stesso in
   `_pico/.dspico_updater_state.json`.
-- **Rate limit GitHub**: le richieste API non autenticate sono limitate
-  a 60/ora per IP.
 
 ## Struttura del progetto
 
