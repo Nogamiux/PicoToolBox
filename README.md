@@ -52,7 +52,8 @@ pyinstaller --noconfirm --windowed --name "DSpico Toolbox" ^
     --add-data "assets/fonts/PressStart2P-Regular.ttf;assets/fonts" main.py
 ```
 
-(su macOS/Linux sostituisci il `;` con `:` nel parametro `--add-data`).
+(su macOS/Linux sostituisci il `;` con `:` nel parametro `--add-data`, in alcune distro potrebbe essere necessario
+usare la parola chiave `python3-` prima di `pyinstaller` perchè potrebbe dare errore, specialmente su debian 12 o superiori).
 
 L'eseguibile finale si trova in `dist/DSpico Toolbox/`. Per un vero
 pacchetto installabile:
