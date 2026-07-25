@@ -42,14 +42,17 @@ Richiede Python 3.10+.
 
 ## Creare un eseguibile/installer
 
+Il modo più semplice per ottenere un `.exe` (Windows), un `.app` (macOS) o
+un binario Linux è [PyInstaller](https://pyinstaller.org/), da eseguire
+**sul sistema operativo di destinazione** (PyInstaller non fa cross-compile)
+
 Per creare un eseguibile, sarà a priori necessario clonare la repository,
 si può fare tranquillamente con [Git](https://git-scm.com/) via terminale:
 ```bash
 git clone "https://github.com/Nogamiux/PicoToolBox"
 ```
-Il modo più semplice per ottenere un `.exe` (Windows), un `.app` (macOS) o
-un binario Linux è [PyInstaller](https://pyinstaller.org/), da eseguire
-**sul sistema operativo di destinazione** (PyInstaller non fa cross-compile):
+
+Successivamente, aprire un terminale nella cartella della repository appena clonata ed eseguire i seguenti comandi:
 
 ```bash
 pip install pyinstaller
