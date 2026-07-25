@@ -44,7 +44,15 @@ Richiede Python 3.10+.
 
 Il modo più semplice per ottenere un `.exe` (Windows), un `.app` (macOS) o
 un binario Linux è [PyInstaller](https://pyinstaller.org/), da eseguire
-**sul sistema operativo di destinazione** (PyInstaller non fa cross-compile):
+**sul sistema operativo di destinazione** (PyInstaller non fa cross-compile)
+
+Per creare un eseguibile, sarà a priori necessario clonare la repository,
+si può fare tranquillamente con [Git](https://git-scm.com/) via terminale:
+```bash
+git clone "https://github.com/Nogamiux/PicoToolBox"
+```
+
+Successivamente, aprire un terminale nella cartella della repository appena clonata ed eseguire i seguenti comandi:
 
 ```bash
 pip install pyinstaller
@@ -52,7 +60,7 @@ pyinstaller --noconfirm --windowed --name "DSpico Toolbox" ^
     --add-data "assets/fonts/PressStart2P-Regular.ttf;assets/fonts" main.py
 ```
 
-(su macOS/Linux sostituisci il `;` con `:` nel parametro `--add-data`).
+(su macOS/Linux sostituisci il `;` con `:` nel parametro `--add-data`, in alcune distro potrebbe essere necessario)
 
 L'eseguibile finale si trova in `dist/DSpico Toolbox/`. Per un vero
 pacchetto installabile:
