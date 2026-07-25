@@ -4,6 +4,11 @@ Tool desktop (Windows / macOS / Linux) che guida passo passo tutte le
 procedure per una DSpico: flashing del firmware, aggiornamento dei
 componenti, installazione emulatori, cover, temi e supporto DSiWare.
 
+<p> PicoToolBox non è affiliato ne ad LNH Team, ne a Flashcarts.net, ne alle guide scritte su Sanrax.<br>
+è un tool che si avvale di queste fonti per provare a semplificare il più possibile configurazioni possibili sulle cartucce DSpico.<br>
+Per supportare bene questi progetti, supportate i dev di queste 3 fonti citate, senza il loro lavoro questo tool non potrebbe nemmeno esistere.</p>
+
+
 ## Tab
 
 - **Setup** — Rileva la DSpico collegata al PC in modalità bootloader
@@ -11,9 +16,15 @@ componenti, installazione emulatori, cover, temi e supporto DSiWare.
   mantenuto dalla community (`coderkei/dspico-hybrid-fw`). Non
   distribuiamo il firmware WRFUxxed del LNH Team: per quello segui la
   guida ufficiale. Link diretti alle guide DSi/3DS per chi ha bisogno
-  della mod software.
+  della mod software. per la cronaca, questa funziona va solo per i dispositivi DSpico,
+  Non funziona in alcun modo su dispositivi R4 Ace3ds e simili.
+  Anche quelle compatibili con Pico-Launcher e Pico-Loader.
 - **Install and Update** — Aggiorna Pico Loader e Pico Launcher
   dell'LNH Team, con backup automatico dei file precedenti.
+  l'Aggiornamento dei componenti non è stato testato su flashcart diverse dalla DSpico.
+  Però, dovrebbe funzionare sulle flashcart compatibili con Pico-Loader e Pico-Launcher.
+  La funzione per inizializzare la SD formatta e prepara la SD per essere utilizzata con la DSpico.
+  Non funzionerà su altre Flashcart, in futuro potremmo pensare di aggiungerne il supporto.
 - **Setup Emulators** — Catalogo di 14 emulatori per Pico-Launcher
   (GBA, GB/C, SNES, NES, Atari 2600/5200/7800/800, Genesis, Master
   System/Game Gear, NeoGeo Pocket, PC-Engine, ColecoVision,
@@ -28,6 +39,9 @@ componenti, installazione emulatori, cover, temi e supporto DSiWare.
 - **DSi** — Prepara la SD per DSiWare/ROM cifrate scaricando
   `pico_file_dump.nds`; il dump di BIOS/NAND va completato sulla
   console (solo su DSi/3DS).
+  Nota importante, questa funziona è disponibile solo per la DSpico,
+  dato che molte flashcart tradizionali a parte poche eccezzioni non
+  eseguono software DSi.
 
 ## Avvio rapido (da sorgente)
 
@@ -86,6 +100,12 @@ pacchetto installabile:
   contengono un numero di versione leggibile dall'esterno. Il tool
   tiene traccia di cosa ha installato lui stesso in
   `_pico/.dspico_updater_state.json`.
+
+## Crediti
+
+[Sanrax](https://sanrax.github.io/flashcart-guides/) Per tutte le guide riguardanti DSpico e molte altre flashcart.
+[Simo3ds](https://github.com/Simo3ds) Per l'aiuto fornito per la Build Linux.
+[DefeatOf13](https://github.com/DefeatOf13) Per aver testato il software sulla propria DSpico.
 
 ## Struttura del progetto
 
