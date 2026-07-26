@@ -1,8 +1,10 @@
 # DSpico Toolbox
 
-Tool desktop (Windows / macOS / Linux) che guida passo passo tutte le
+Tool desktop (Windows / Linux) che guida passo passo tutte le
 procedure per una DSpico: flashing del firmware, aggiornamento dei
 componenti, installazione emulatori, cover, temi e supporto DSiWare.
+
+<p>Hey tu, se stai cercando la build linux, la puoi trovare in questa <a href="https://github.com/Simo3ds/PicoToolBox"> Repo</a> gesista da Simo3ds.</p>
 
 <p> PicoToolBox non è affiliato ne ad LNH Team, ne a Flashcarts.net, ne alle guide scritte su Sanrax.<br>
 è un tool che si avvale di queste fonti per provare a semplificare il più possibile configurazioni possibili sulle cartucce DSpico.<br>
@@ -80,8 +82,7 @@ L'eseguibile finale si trova in `dist/DSpico Toolbox/`. Per un vero
 pacchetto installabile:
 
 - **Windows**: impacchetta la cartella `dist/` con
-  [Inno Setup](https://jrsoftware.org/isinfo.php).
-- **macOS**: usa `--windowed` (già incluso sopra) per generare un `.app`.
+  [Inno Setup](https://jrsoftware.org/isinfo.php)..
 - **Linux**: distribuisci il binario, oppure impacchettalo come
   AppImage con [python-appimage](https://github.com/niess/python-appimage).
 
@@ -103,9 +104,9 @@ pacchetto installabile:
 
 ## Crediti
 
-[Sanrax](https://sanrax.github.io/flashcart-guides/) Per tutte le guide riguardanti DSpico e molte altre flashcart.
-[Simo3ds](https://github.com/Simo3ds) Per l'aiuto fornito per la Build Linux.
-[DefeatOf13](https://github.com/DefeatOf13) Per aver testato il software sulla propria DSpico.
+<p> <a href="https://sanrax.github.io/flashcart-guides/"> Sanrax</a> Per tutte le guide riguardanti DSpico e molte altre flashcart.</p>
+<p> <a href="https://github.com/Simo3ds"> Simo3ds</a> Per l'aiuto fornito per la Build Linux.</p>
+<p> <a href="https://github.com/DefeatOf13"> DefeatOf13</a> Per aver testato il software sulla propria DSpico.</p>
 
 ## Struttura del progetto
 
