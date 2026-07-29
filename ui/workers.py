@@ -11,6 +11,7 @@ from core import emulators as emulators_mod
 from core import dsi as dsi_mod
 from core import themes as themes_mod
 from core import format_sd as format_sd_mod
+from core import saves_manager
 
 
 class DriveScanWorker(QThread):
@@ -201,3 +202,105 @@ class DsiPrepWorker(QThread):
             self.finished_ok.emit(path)
         except Exception as exc:
             self.failed.emit(str(exc))
+
+from core import akmenu as akmenu_mod
+
+
+class AkMenuInstallWorker(QThread):
+    progress = Signal(str)
+    finished_ok = Signal(object)
+    failed = Signal(str)
+
+    def __init__(self, drive, parent=None):
+        super().__init__(parent)
+        self.drive = drive
+
+    def run(self):
+        try:
+            result = akmenu_mod.install_akmenu_next(self.drive, self.progress.emit)
+            self.finished_ok.emit(result)
+        except Exception as exc:
+            self.failed.emit(str(exc))
+
+
+class NdsBootstrapInstallWorker(QThread):
+    progress = Signal(str)
+    finished_ok = Signal(object)
+    failed = Signal(str)
+
+    def __init__(self, drive, parent=None):
+        super().__init__(parent)
+        self.drive = drive
+
+    def run(self):
+        try:
+            result = akmenu_mod.install_nds_bootstrap(self.drive, self.progress.emit)
+            self.finished_ok.emit(result)
+        except Exception as exc:
+            self.failed.emit(str(exc))
+class TwlMenuInstallWorker(QThread):
+    progress = Signal(str)
+    finished_ok = Signal(object)
+    failed = Signal(str)
+
+    def __init__(self, drive, format_sd=False, set_autoboot=False, parent=None):
+        super().__init__(parent)
+        self.drive = drive
+        self.format_sd = format_sd
+        self.set_autoboot = set_autoboot
+
+    def run(self):
+        try:
+            current_drive = self.drive
+            if self.format_sd:
+                new_mountpoint = format_sd_mod.format_fat32(current_drive.mountpoint, self.progress.emit)
+                format_sd_mod.ensure_pico_structure(new_mountpoint)
+                
+                fresh_drives = drives_mod.scan_drives()
+                current_drive = next(
+                    (d for d in fresh_drives if d.mountpoint == new_mountpoint),
+                    drives_mod.DriveInfo(mountpoint=new_mountpoint, label=new_mountpoint),
+                )
+            else:
+                self.progress.emit("Preparo l'installazione di TWiLightMenu++...")
+                
+            result = akmenu_mod.install_twlmenu(current_drive, self.set_autoboot, self.progress.emit)
+            self.finished_ok.emit(result)
+        except Exception as exc:
+            self.failed.emit(str(exc))
+class BackupSavesWorker(QThread):
+    progress = Signal(str)
+    finished_ok = Signal(int)
+    failed = Signal(str)
+
+    def __init__(self, drive, zip_path, parent=None):
+        super().__init__(parent)
+        self.drive = drive
+        self.zip_path = zip_path
+
+    def run(self):
+        try:
+            count = saves_manager.backup_saves(self.drive.mountpoint, self.zip_path, self.progress.emit)
+            self.finished_ok.emit(count)
+        except Exception as exc:
+            self.failed.emit(str(exc))
+
+
+class RestoreSavesWorker(QThread):
+    progress = Signal(str)
+    finished_ok = Signal(int, int)
+    failed = Signal(str)
+
+    def __init__(self, drive, zip_path, is_twl, parent=None):
+        super().__init__(parent)
+        self.drive = drive
+        self.zip_path = zip_path
+        self.is_twl = is_twl
+
+    def run(self):
+        try:
+            restored, orphaned = saves_manager.restore_saves(self.drive.mountpoint, self.zip_path, self.is_twl, self.progress.emit)
+            self.finished_ok.emit(restored, orphaned)
+        except Exception as exc:
+            self.failed.emit(str(exc))
+

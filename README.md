@@ -1,74 +1,79 @@
 # DSpico Toolbox
 
-Tool desktop (Windows / Linux) che guida passo passo tutte le
-procedure per una DSpico: flashing del firmware, aggiornamento dei
-componenti, installazione emulatori, cover, temi e supporto DSiWare.
+Per il README in italiano [Clicca qui](./READMEIT.md)
 
-<p>Hey tu, se stai cercando la build linux, la puoi trovare in questa <a href="https://github.com/Simo3ds/PicoToolBox"> Repo</a> gesista da Simo3ds.</p>
+Desktop tool (Windows / Linux) that guides you step by step through all
+procedures for a DSpico: firmware flashing, component updates,
+emulator installation, covers, themes and DSiWare support.
 
-<p> PicoToolBox non è affiliato ne ad LNH Team, ne a Flashcarts.net, ne alle guide scritte su Sanrax.<br>
-è un tool che si avvale di queste fonti per provare a semplificare il più possibile configurazioni possibili sulle cartucce DSpico.<br>
-Per supportare bene questi progetti, supportate i dev di queste 3 fonti citate, senza il loro lavoro questo tool non potrebbe nemmeno esistere.</p>
+<p>Hey you, if you're looking for the Linux build, you can find it in this <a href="https://github.com/Simo3ds/PicoToolBox">Repo</a> maintained by Simo3ds.</p>
+
+<p>PicoToolBox is not affiliated with LNH Team, Flashcarts.net, or the guides written on Sanrax.<br>
+It is a tool that makes use of these sources to simplify as much as possible the various configurations available for DSpico cartridges.<br>
+To properly support these projects, please support the devs behind these 3 sources — without their work, this tool wouldn't even exist.</p>
 
 
-## Tab
+## Tabs
 
-- **Setup** — Rileva la DSpico collegata al PC in modalità bootloader
-  RP2040 (drive `RPI-RP2`) e flasha l'ultimo firmware **ibrido**
-  mantenuto dalla community (`coderkei/dspico-hybrid-fw`). Non
-  distribuiamo il firmware WRFUxxed del LNH Team: per quello segui la
-  guida ufficiale. Link diretti alle guide DSi/3DS per chi ha bisogno
-  della mod software. per la cronaca, questa funziona va solo per i dispositivi DSpico,
-  Non funziona in alcun modo su dispositivi R4 Ace3ds e simili.
-  Anche quelle compatibili con Pico-Launcher e Pico-Loader.
-- **Install and Update** — Aggiorna Pico Loader e Pico Launcher
-  dell'LNH Team, con backup automatico dei file precedenti.
-  l'Aggiornamento dei componenti non è stato testato su flashcart diverse dalla DSpico.
-  Però, dovrebbe funzionare sulle flashcart compatibili con Pico-Loader e Pico-Launcher.
-  La funzione per inizializzare la SD formatta e prepara la SD per essere utilizzata con la DSpico.
-  Non funzionerà su altre Flashcart, in futuro potremmo pensare di aggiungerne il supporto.
-- **Setup Emulators** — Catalogo di 14 emulatori per Pico-Launcher
+- **Setup** — Detects the DSpico connected to the PC in RP2040 bootloader
+  mode (`RPI-RP2` drive) and flashes the latest **hybrid** firmware
+  maintained by the community (`coderkei/dspico-hybrid-fw`). We do not
+  distribute the LNH Team's WRFUxxed firmware: for that, follow the
+  official guide. Direct links to DSi/3DS guides for those who need the
+  software mod. For the record, this feature only works for DSpico devices —
+  it does not work in any way on R4, Ace3ds or similar devices.
+  It also works on cartridges compatible with Pico-Launcher and Pico-Loader.
+- **Install and Update** — Updates Pico Loader and Pico Launcher
+  from the LNH Team, with automatic backup of previous files.
+  Component updates have not been tested on flashcarts other than the DSpico.
+  However, it should work on flashcarts compatible with Pico-Loader and Pico-Launcher.
+  The SD initialization function formats and prepares the SD card for use with the DSpico.
+  It will not work on other flashcarts — we may consider adding support for them in the future.
+- **Setup Emulators** — Catalog of 14 emulators for Pico-Launcher
   (GBA, GB/C, SNES, NES, Atari 2600/5200/7800/800, Genesis, Master
   System/Game Gear, NeoGeo Pocket, PC-Engine, ColecoVision,
-  IntelliVision). Un click scarica il file giusto, crea le cartelle
-  ROM/dati necessarie e aggiorna `_pico/settings.json` per farli
-  lanciare al volo da Pico-Launcher. Le eventuali BIOS non sono
-  incluse (copyright): vanno procurate autonomamente.
-- **Covers** — Apre PicoCover (strumento di terze parti, non
-  affiliato) per generare le cover dei giochi.
-- **Themes** — Apre l'archivio temi ufficiale e installa Pico Theme
-  Switcher, un homebrew per cambiare tema direttamente dalla console.
-- **DSi** — Prepara la SD per DSiWare/ROM cifrate scaricando
-  `pico_file_dump.nds`; il dump di BIOS/NAND va completato sulla
-  console (solo su DSi/3DS).
-  Nota importante, questa funziona è disponibile solo per la DSpico,
-  dato che molte flashcart tradizionali a parte poche eccezzioni non
-  eseguono software DSi.
+  IntelliVision). One click downloads the right file, creates the
+  necessary ROM/data folders and updates `_pico/settings.json` to launch
+  them directly from Pico-Launcher. BIOS files are not included
+  (copyright): you need to source them yourself.
+- **Covers** — Opens PicoCover (a third-party tool, not affiliated)
+  to generate game covers. (Or TwilightBoxArt if you use TWL.)
+- **Themes** — Opens the official theme archive and installs Pico Theme
+  Switcher, a homebrew app to change themes directly from the console.
+- **DSi** — Prepares the SD for DSiWare/encrypted ROMs by downloading
+  `pico_file_dump.nds`; the BIOS/NAND dump must be completed on the
+  console (DSi/3DS only).
+  Important note: this feature is only available for the DSpico,
+  as most traditional flashcarts — with few exceptions — do not run DSi software.
+- **Extras** — Optionally, you can install other menus on the DSpico.
+  This section allows you to install [AkMenuNext](https://github.com/coderkei/akmenu-next)
+  or [TWiLight Menu++](https://github.com/DS-Homebrew/TWiLightMenu).
+  It also allows you to backup and restore your save files.
 
-## Avvio rapido (da sorgente)
+## Quick start (from source)
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate        # su Windows: venv\Scripts\activate
+source venv/bin/activate        # on Windows: venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
 ```
 
-Richiede Python 3.10+.
+Requires Python 3.10+.
 
-## Creare un eseguibile/installer
+## Creating an executable/installer
 
-Il modo più semplice per ottenere un `.exe` (Windows), un `.app` (macOS) o
-un binario Linux è [PyInstaller](https://pyinstaller.org/), da eseguire
-**sul sistema operativo di destinazione** (PyInstaller non fa cross-compile)
+The easiest way to get a `.exe` (Windows), `.app` (macOS) or a Linux
+binary is [PyInstaller](https://pyinstaller.org/), which must be run
+**on the target operating system** (PyInstaller does not cross-compile).
 
-Per creare un eseguibile, sarà a priori necessario clonare la repository,
-si può fare tranquillamente con [Git](https://git-scm.com/) via terminale:
+To create an executable, you will first need to clone the repository.
+You can do so easily with [Git](https://git-scm.com/) via terminal:
 ```bash
 git clone "https://github.com/Nogamiux/PicoToolBox"
 ```
 
-Successivamente, aprire un terminale nella cartella della repository appena clonata ed eseguire i seguenti comandi:
+Then open a terminal in the cloned repository folder and run the following commands:
 
 ```bash
 pip install pyinstaller
@@ -76,64 +81,66 @@ pyinstaller --noconfirm --windowed --name "DSpico Toolbox" ^
     --add-data "assets/fonts/PressStart2P-Regular.ttf;assets/fonts" main.py
 ```
 
-(su macOS/Linux sostituisci il `;` con `:` nel parametro `--add-data`, in alcune distro potrebbe essere necessario)
+(on macOS/Linux replace `;` with `:` in the `--add-data` parameter; on some distros this may be required)
 
-L'eseguibile finale si trova in `dist/DSpico Toolbox/`. Per un vero
-pacchetto installabile:
+The final executable is located in `dist/DSpico Toolbox/`. For a proper
+installable package:
 
-- **Windows**: impacchetta la cartella `dist/` con
-  [Inno Setup](https://jrsoftware.org/isinfo.php)..
-- **Linux**: distribuisci il binario, oppure impacchettalo come
-  AppImage con [python-appimage](https://github.com/niess/python-appimage).
+- **Windows**: package the `dist/` folder with
+  [Inno Setup](https://jrsoftware.org/isinfo.php).
+- **Linux**: distribute the binary, or package it as an
+  AppImage with [python-appimage](https://github.com/niess/python-appimage).
 
-## Note tecniche
+## Technical notes
 
-- **Rilevamento SD**: si basa sulla presenza di `_picoboot.nds` e/o
-  della cartella `_pico/` in root (come da layout ufficiale Pico-Launcher).
-- **Rilevamento bootloader RP2040**: si basa sulla presenza del file
-  `INFO_UF2.TXT`, che ogni chip RP2040 (quindi anche la DSpico) espone
-  in root quando è collegato in modalità bootloader.
-- **Firmware distribuito**: solo l'asset `.uf2` con "hybrid" nel nome
-  dell'ultima release di `coderkei/dspico-hybrid-fw`; le altre varianti
-  della release (WRFUxxed senza binario, Devkit/Panda) vengono ignorate
-  di proposito.
-- **Versioni installate**: i file binari di Pico Loader/Launcher non
-  contengono un numero di versione leggibile dall'esterno. Il tool
-  tiene traccia di cosa ha installato lui stesso in
-  `_pico/.dspico_updater_state.json`.
+- **SD detection**: based on the presence of `_picoboot.nds` and/or
+  the `_pico/` folder in root (as per the official Pico-Launcher layout).
+- **RP2040 bootloader detection**: based on the presence of the
+  `INFO_UF2.TXT` file, which every RP2040 chip (including the DSpico) exposes
+  in root when connected in bootloader mode.
+- **Distributed firmware**: only the `.uf2` asset with "hybrid" in the name
+  from the latest release of `coderkei/dspico-hybrid-fw`; other variants
+  in the release (WRFUxxed without binary, Devkit/Panda) are intentionally ignored.
+- **Installed versions**: Pico Loader/Launcher binaries do not contain a
+  version number readable from the outside. The tool keeps track of what
+  it has installed in `_pico/.dspico_updater_state.json`.
 
-## Crediti
+## Credits
 
-<p> <a href="https://sanrax.github.io/flashcart-guides/"> Sanrax</a> Per tutte le guide riguardanti DSpico e molte altre flashcart.</p>
-<p> <a href="https://github.com/Simo3ds"> Simo3ds</a> Per l'aiuto fornito per la Build Linux.</p>
-<p> <a href="https://github.com/DefeatOf13"> DefeatOf13</a> Per aver testato il software sulla propria DSpico.</p>
+<p><a href="https://sanrax.github.io/flashcart-guides/">Sanrax</a> For all the guides regarding DSpico and many other flashcarts.</p>
+<p><a href="https://github.com/Simo3ds">Simo3ds</a> For the help provided with the Linux build.</p>
+<p><a href="https://github.com/DefeatOf13">DefeatOf13</a> For testing the software on their own DSpico.</p>
 
-## Struttura del progetto
+## Project structure
 
 ```
-main.py                       punto d'ingresso, carica il font pixel
-assets/fonts/                  font Press Start 2P per titoli/tab
+main.py                       entry point, loads the pixel font
+assets/fonts/                  Press Start 2P font for titles/tabs
 core/
-  drives.py                    rilevamento SD e file installati
-  firmware.py                   rilevamento bootloader RP2040 + flash firmware
-  github_api.py                  client per le release GitHub
-  updater.py                      download/installazione Pico Loader/Launcher
-  emulators.py                     catalogo emulatori + installer generico
-  themes.py                         installer Pico Theme Switcher
-  dsi.py                              preparazione SD per DSiWare
-  links.py                             URL esterni centralizzati
-  cheats.py                             gestione usrcheat.dat (non wired in UI)
-  state.py                               versioni componenti installati
+  drives.py                    SD detection and installed files
+  firmware.py                   RP2040 bootloader detection + firmware flash
+  github_api.py                  GitHub releases client
+  updater.py                      Pico Loader/Launcher download and installation
+  emulators.py                     emulator catalog + generic installer
+  themes.py                         Pico Theme Switcher installer
+  dsi.py                              SD preparation for DSiWare
+  links.py                             centralised external URLs
+  cheats.py                             usrcheat.dat management (unused for now)
+  state.py                               installed component versions
+  akmenu.py                               extras section with TWL and AkMenu
+  i18n.py                                  Italian and English UI strings
+  saves_manager.py                          save backup and restore
 ui/
-  main_window.py                finestra principale (tab + selettore SD)
-  workers.py                     thread in background per rete/IO
-  theme.py                        palette e QSS "quadrettato"
-  widgets.py                       widget condivisi tra le tab
+  main_window.py                main window (tabs + SD selector)
+  workers.py                     background threads for network/IO
+  theme.py                        palette and "pixel" QSS stylesheet
+  widgets.py                       shared widgets across tabs
   tabs/
-    setup_tab.py                   flash firmware
-    install_update_tab.py           aggiornamento Pico Loader/Launcher
-    emulators_tab.py                 installazione emulatori
-    covers_tab.py                     apertura PicoCover
-    themes_tab.py                      temi + theme switcher
-    dsi_tab.py                          supporto DSiWare
+    setup_tab.py                   firmware flash
+    install_update_tab.py           Pico Loader/Launcher update
+    emulators_tab.py                 emulator installation
+    covers_tab.py                     PicoCover launcher
+    themes_tab.py                      themes + theme switcher
+    dsi_tab.py                          DSiWare support
+    extra_tab.py                         extra features
 ```

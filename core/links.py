@@ -1,5 +1,8 @@
 
 PICOCOVER_URL = "https://scaletta.github.io/PicoCover/"
+TWL_BOXART_URL = "https://twilightboxart.com/"
+TWL_SKINS_URL = "https://skins.ds-homebrew.com/"
+AKMENU_THEMES_URL = "https://themes.flashcarts.net/akmenu/"
 THEMES_ARCHIVE_URL = "https://themes.flashcarts.net/pico/"
 DSI_CFW_GUIDE_URL = "https://dsi.cfw.guide/"
 THREEDS_HACKS_GUIDE_URL = "https://3ds.hacks.guide/"

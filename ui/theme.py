@@ -304,4 +304,35 @@ QScrollBar::handle:vertical {{
 QScrollBar::handle:vertical:hover {{
     background: {DS_RED_DARK};
 }}
+QDialog, QMessageBox {{
+    background: {DSI_NAVY_DARKEST};
+}}
+
+QMessageBox QLabel {{
+    color: {DSI_WHITE};
+    font-size: 12px;
+}}
+
+QMessageBox QPushButton {{
+    background: {DSI_NAVY_LIGHT};
+    color: {DSI_WHITE};
+    border-radius: 0;
+    border-top: 2px solid {DSI_NAVY_BORDER};
+    border-left: 2px solid {DSI_NAVY_BORDER};
+    border-bottom: 2px solid {DSI_NAVY_DARKEST};
+    border-right: 2px solid {DSI_NAVY_DARKEST};
+    padding: 6px 14px;
+    font-weight: 600;
+}}
+
+QMessageBox QPushButton:hover {{
+    background: {DSI_NAVY_BORDER};
+}}
+
+QMessageBox QPushButton:pressed {{
+    border-top: 2px solid {DSI_NAVY_DARKEST};
+    border-left: 2px solid {DSI_NAVY_DARKEST};
+    border-bottom: 2px solid {DSI_NAVY_BORDER};
+    border-right: 2px solid {DSI_NAVY_BORDER};
+}}
 """

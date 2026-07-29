@@ -32,8 +32,8 @@ from .drives import DriveInfo
 
 ProgressCB = Optional[Callable[[str], None]]
 
-# Nome (case-insensitive, senza estensione) dell'asset specifico per DSpico
-# nelle release di Pico Loader, es. "Pico_Loader_DSPICO.zip".
+                                                                           
+                                                             
 LOADER_PLATFORM_TAG = "dspico"
 
 
@@ -100,8 +100,8 @@ def install_pico_loader(drive: DriveInfo, release: ReleaseInfo, progress: Progre
         with zipfile.ZipFile(zip_path) as zf:
             zf.extractall(extract_dir)
 
-        # I file di questo zip sono piatti (nessuna sottocartella): vanno
-        # tutti dentro _pico/ sulla SD.
+                                                                         
+                                       
         for root, _dirs, files in os.walk(extract_dir):
             for fname in files:
                 src = os.path.join(root, fname)
@@ -138,7 +138,7 @@ def install_pico_launcher(drive: DriveInfo, release: ReleaseInfo, progress: Prog
         with zipfile.ZipFile(zip_path) as zf:
             zf.extractall(extract_dir)
 
-        # Cerchiamo il launcher: puo' chiamarsi _picoboot.nds o LAUNCHER.nds
+                                                                            
         launcher_src = None
         for root, _dirs, files in os.walk(extract_dir):
             for fname in files:
@@ -153,9 +153,9 @@ def install_pico_launcher(drive: DriveInfo, release: ReleaseInfo, progress: Prog
             shutil.copy2(launcher_src, drive.launcher_path)
             installed.append("_picoboot.nds")
 
-        # Se lo zip contiene anche una cartella _pico/ (temi, config), la
-        # fondiamo dentro _pico/ sulla SD, ricorsivamente (i temi vivono
-        # in sottocartelle come _pico/themes/<nome>/*.bin).
+                                                                         
+                                                                        
+                                                           
         pico_src_root = None
         for root, dirs, _files in os.walk(extract_dir):
             if os.path.basename(root).lower() == "_pico":

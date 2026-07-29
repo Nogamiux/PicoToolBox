@@ -8,6 +8,7 @@ from PySide6.QtWidgets import (
 
 from core import links
 from core.emulators import CATALOG
+from core.i18n import t
 from ..workers import EmulatorInstallWorker
 
 
@@ -38,7 +39,7 @@ class EmulatorRow(QFrame):
         text_col.addWidget(self.status_label)
         layout.addLayout(text_col, stretch=1)
 
-        self.install_btn = QPushButton("Installa")
+        self.install_btn = QPushButton(t("btn_emu_install"))
         self.install_btn.setProperty("class", "pillButton")
         self.install_btn.clicked.connect(lambda: self._on_install(self))
         layout.addWidget(self.install_btn)
@@ -48,6 +49,10 @@ class EmulatorRow(QFrame):
 
     def set_busy(self, busy: bool):
         self.install_btn.setEnabled(not busy)
+
+    def retranslate_ui(self):
+        if self.install_btn.isEnabled():
+            self.install_btn.setText(t("btn_emu_install"))
 
 
 class EmulatorsTab(QWidget):
@@ -66,20 +71,16 @@ class EmulatorsTab(QWidget):
         title.setProperty("class", "sectionTitle")
         header_row.addWidget(title)
         header_row.addStretch(1)
-        guide_btn = QPushButton("Guida completa")
-        guide_btn.setProperty("class", "pillButtonSecondary")
-        guide_btn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl(links.EMULATORS_GUIDE_URL)))
-        header_row.addWidget(guide_btn)
+        self.guide_btn = QPushButton()
+        self.guide_btn.setProperty("class", "pillButtonSecondary")
+        self.guide_btn.clicked.connect(lambda: QDesktopServices.openUrl(QUrl(links.EMULATORS_GUIDE_URL)))
+        header_row.addWidget(self.guide_btn)
         root.addLayout(header_row)
 
-        subtitle = QLabel(
-            "Scarica e installa gli emulatori direttamente su _pico/emulators (o Emulators/ per "
-            "quelli non lanciabili al volo), creando le cartelle ROM e le associazioni file "
-            "necessarie. Le eventuali BIOS non vengono fornite: procuratele da soli."
-        )
-        subtitle.setWordWrap(True)
-        subtitle.setProperty("class", "mutedText")
-        root.addWidget(subtitle)
+        self.subtitle = QLabel()
+        self.subtitle.setWordWrap(True)
+        self.subtitle.setProperty("class", "mutedText")
+        root.addWidget(self.subtitle)
 
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
@@ -97,26 +98,35 @@ class EmulatorsTab(QWidget):
         scroll.setWidget(content)
         root.addWidget(scroll, stretch=1)
 
+        self.main.lang_changed.connect(self.retranslate_ui)
+        self.retranslate_ui()
+
+    def retranslate_ui(self):
+        self.guide_btn.setText(t("btn_emu_guide"))
+        self.subtitle.setText(t("emu_subtitle"))
+        for row in self._rows.values():
+            row.retranslate_ui()
+
     def _install(self, row: EmulatorRow):
         drive = self.main.selected_drive
         if not drive or not drive.is_dspico:
-            QMessageBox.warning(self, "Setup Emulators", "Seleziona prima una SD DSPico valida.")
+            QMessageBox.warning(self, "Setup Emulators", t("emu_select_sd"))
             return
 
         row.set_busy(True)
-        row.set_status("Installazione in corso...")
+        row.set_status(t("emu_installing"))
         worker = EmulatorInstallWorker(row.spec, drive)
         worker.progress.connect(row.set_status)
         worker.finished_ok.connect(lambda emu_id, installed: self._on_finished(row, installed))
-        worker.failed.connect(lambda emu_id, msg: self._on_failed(row, msg))
+        worker.failed.connect(lambda emu_id, msg: self._on_failed(row, row.spec.name, msg))
         self._workers[row.spec.id] = worker
         worker.start()
 
     def _on_finished(self, row: EmulatorRow, installed: list[str]):
         row.set_busy(False)
-        row.set_status(f"Installato ({len(installed)} file/cartelle aggiornati).")
+        row.set_status(t("emu_installed", count=len(installed)))
 
-    def _on_failed(self, row: EmulatorRow, msg: str):
+    def _on_failed(self, row: EmulatorRow, name: str, msg: str):
         row.set_busy(False)
-        row.set_status("Installazione fallita.")
-        QMessageBox.critical(self, "Setup Emulators", f"Installazione di {row.spec.name} fallita:\n{msg}")
+        row.set_status(t("emu_failed"))
+        QMessageBox.critical(self, "Setup Emulators", t("emu_failed_msg", name=name, msg=msg))
